@@ -1,0 +1,18 @@
+{
+  "login": {
+    "title": "Login",
+    "welcome": "Welcome to Pet Manager MT",
+    "username": "Username",
+    "password": "Password",
+    "submit": "Sign in",
+    "loading": "Signing in...",
+    "error": "Invalid username or password"
+  },
+  "pets": {
+    "loading": "Loading pets...",
+    "error": "Failed to load pets",
+    "prev": "Previous",
+    "next": "Next",
+    "page": "Page {{page}} of {{pageCount}}"
+  }
+}
