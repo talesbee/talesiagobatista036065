@@ -27,9 +27,10 @@ export interface PetsResponse {
   pageCount: number;
 }
 
-export async function getPets(page = 1, size = 10, nome?: string): Promise<PetsResponse> {
+export async function getPets(page = 0, size = 10, nome?: string, raca?: string): Promise<PetsResponse> {
   const params: any = { page, size };
   if (nome) params.nome = nome;
+  if (raca) params.raca = raca;
   const response = await api.get('/v1/pets', { params });
   return response.data;
 }
