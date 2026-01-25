@@ -10,9 +10,9 @@ export default function AppRoutes() {
     <BrowserRouter>
       <Suspense fallback={<div>Carregando...</div>}>
         <Routes>
-          <Route path="/" element={<Pets />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/pets" element={<Pets />} />
           <Route path="/tutores" element={<Tutors />} />
-          <Route path="/login" element={<Login />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
