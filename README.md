@@ -1,4 +1,5 @@
 # Pet Manager MT
+
 ## talesiagobatista036065
 
 Projeto profissional para avaliação técnica — Registro público de Pets e seus tutores (SPA React + TypeScript).
@@ -6,6 +7,7 @@ Projeto profissional para avaliação técnica — Registro público de Pets e s
 ## Decisão sobre tela inicial
 
 O enunciado sugere que a tela inicial seja a listagem de pets. No entanto, como a API exige autenticação para fornecer os dados, optei por iniciar o fluxo pela tela de login. Isso evita:
+
 - Exibir uma tela de pets vazia ou com erro de autenticação, o que prejudicaria a experiência do usuário.
 - "Chumbar" credenciais no código, o que é uma má prática de segurança.
 - Um fluxo confuso, onde o usuário teria que entender que precisa logar antes de ver qualquer dado.
@@ -15,13 +17,13 @@ Assim, o usuário é direcionado primeiro ao login e, após autenticação, é r
 ## Como rodar o projeto
 
 1. Instale as dependências:
-	```
-	npm install
-	```
+   ```
+   npm install
+   ```
 2. Inicie o projeto:
-	```
-	npm start
-	```
+   ```
+   npm run dev
+   ```
 3. Acesse [http://localhost:3000](http://localhost:3000) no navegador.
 
 ## Requisitos
