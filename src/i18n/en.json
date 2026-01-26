@@ -9,10 +9,18 @@
     "error": "Invalid username or password"
   },
   "pets": {
+    "title": "Pet Manager MT",
     "loading": "Loading pets...",
     "error": "Failed to load pets",
     "prev": "Previous",
     "next": "Next",
-    "page": "Page {{page}} of {{pageCount}}"
+    "page": "Page {{page}} of {{pageCount}}",
+    "add": "+",
+    "addPet": "Add Pet",
+    "search": "Search pet by name..."
+  },
+  "tutors": {
+    "title": "Tutors",
+    "addTutor": "Add Tutor"
   }
 }

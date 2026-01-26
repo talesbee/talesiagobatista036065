@@ -9,10 +9,18 @@
     "error": "Usuário ou senha inválidos"
   },
   "pets": {
+    "title": "Pet Manager MT",
     "loading": "Carregando pets...",
     "error": "Erro ao carregar pets",
     "prev": "Anterior",
     "next": "Próxima",
-    "page": "Página {{page}} de {{pageCount}}"
+    "page": "Página {{page}} de {{pageCount}}",
+    "add": "+",
+    "addPet": "Adicionar Pet",
+    "search": "Buscar por nome do pet..."
+  },
+  "tutors": {
+    "title": "Tutores",
+    "addTutor": "Adicionar Tutor"
   }
 }
