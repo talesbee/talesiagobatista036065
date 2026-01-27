@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { getPets, Pet, PetsResponse } from "../services/petService";
@@ -15,6 +15,20 @@ export default function Pets() {
   const [search, setSearch] = useState("");
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const fabRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!fabOpen) return;
+    function handleClickOutside(event: MouseEvent) {
+      if (fabRef.current && !fabRef.current.contains(event.target as Node)) {
+        setFabOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [fabOpen]);
 
   useEffect(() => {
     setLoading(true);
@@ -99,28 +113,30 @@ export default function Pets() {
         </Button>
       </div>
 
-      <FabButton open={fabOpen} onToggle={() => setFabOpen((open) => !open)}>
-        <Button
-          className="flex items-center justify-end rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
-          onClick={() => {
-            setFabOpen(false);
-            alert("Adicionar Pet (em breve)");
-          }}
-        >
-          <span className="material-icons text-1xl">{t("pets.addPet")}</span>
-        </Button>
-        <Button
-          className="flex items-center justify-end rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
-          onClick={() => {
-            setFabOpen(false);
-            alert("Adicionar Tutor (em breve)");
-          }}
-        >
-          <span className="material-icons text-1xl">
-            {t("tutors.addTutor")}
-          </span>
-        </Button>
-      </FabButton>
+      <div ref={fabRef} className="inline-block">
+        <FabButton open={fabOpen} onToggle={() => setFabOpen((open) => !open)}>
+          <Button
+            className="flex items-center justify-end rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
+            onClick={() => {
+              setFabOpen(false);
+              alert("Adicionar Pet (em breve)");
+            }}
+          >
+            <span className="material-icons text-1xl">{t("pets.addPet")}</span>
+          </Button>
+          <Button
+            className="flex items-center justify-end rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
+            onClick={() => {
+              setFabOpen(false);
+              alert("Adicionar Tutor (em breve)");
+            }}
+          >
+            <span className="material-icons text-1xl">
+              {t("tutors.addTutor")}
+            </span>
+          </Button>
+        </FabButton>
+      </div>
     </div>
   );
 }
