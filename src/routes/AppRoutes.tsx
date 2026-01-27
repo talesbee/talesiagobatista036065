@@ -7,6 +7,7 @@ export default function AppRoutes() {
   const Pets = lazy(() => import('../pages/Pets'));
   const Tutors = lazy(() => import('../pages/Tutors'));
   const Login = lazy(() => import('../pages/Login'));
+  const PetDetails = lazy(() => import('../pages/PetDetails'));
 
   const { t } = useTranslation();
   return (
@@ -28,6 +29,22 @@ export default function AppRoutes() {
             element={
               <ProtectedRoute>
                 <Pets />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pets/novo"
+            element={
+              <ProtectedRoute>
+                <PetDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/pets/:id"
+            element={
+              <ProtectedRoute>
+                <PetDetails />
               </ProtectedRoute>
             }
           />

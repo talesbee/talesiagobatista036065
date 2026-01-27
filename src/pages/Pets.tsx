@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPets, Pet, PetsResponse } from '../services/petService';
+import { getPets } from '../services/petService';
 import { CardPet, Button } from '../components';
 import { FabButton } from '../components/FabButton';
+import { Pet, PetsResponse } from '../types';
 
 export default function Pets() {
   const [pets, setPets] = useState<Pet[]>([]);
@@ -84,7 +85,7 @@ export default function Pets() {
               search.trim() === '' || pet.nome.toLowerCase().includes(search.trim().toLowerCase()),
           )
           .map((pet) => (
-            <CardPet key={pet.id} pet={pet} />
+            <CardPet key={pet.id} pet={pet} onClick={() => navigate(`/pets/${pet.id}`)} />
           ))}
       </div>
       <div className="flex justify-center items-center gap-2">
@@ -110,7 +111,7 @@ export default function Pets() {
             className="flex items-center justify-end rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
             onClick={() => {
               setFabOpen(false);
-              alert('Adicionar Pet (em breve)');
+              navigate('/pets/novo');
             }}
           >
             <span className="material-icons text-1xl">{t('pets.addPet')}</span>
