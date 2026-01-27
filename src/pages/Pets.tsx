@@ -60,7 +60,6 @@ export default function Pets() {
 
   return (
     <div className="flex-1 p-3 pt-4 relative">
-      {/* Título e botão de tutores */}
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold text-blue-700">{t("pets.title")}</h1>
         <Button
@@ -71,7 +70,6 @@ export default function Pets() {
           {t("tutors.title")}
         </Button>
       </div>
-      {/* Campo de busca */}
       <div className="flex items-center justify-center mb-6">
         <input
           type="text"
@@ -81,8 +79,6 @@ export default function Pets() {
           onChange={(e) => setSearch(e.target.value)}
         />
       </div>
-
-      {/* Listagem de Pets */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
         {pets
           .filter(
@@ -94,7 +90,6 @@ export default function Pets() {
             <CardPet key={pet.id} pet={pet} />
           ))}
       </div>
-      {/* Paginação */}
       <div className="flex justify-center items-center gap-2">
         <Button
           className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
@@ -112,7 +107,6 @@ export default function Pets() {
           {t("pets.next")}
         </Button>
       </div>
-
       <div ref={fabRef} className="inline-block">
         <FabButton open={fabOpen} onToggle={() => setFabOpen((open) => !open)}>
           <Button

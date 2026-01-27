@@ -1,5 +1,3 @@
-
-
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -17,8 +15,6 @@ export default function Login() {
     const [error, setError] = useState<string | null>(null);
     const navigate = useNavigate();
     const { t, i18n } = useTranslation();
-
-    // Removido: handleChangeLang não é mais necessário pois o seletor global já faz a troca de idioma
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
