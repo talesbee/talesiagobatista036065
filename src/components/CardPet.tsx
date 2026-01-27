@@ -12,7 +12,11 @@ export default function CardPet({ pet, onClick }: CardPetProps) {
       onClick={onClick}
     >
       {pet.foto && pet.foto.url && (
-        <img src={pet.foto.url} alt={pet.nome} className="w-24 h-24 object-cover rounded-full mb-2" />
+        <img
+          src={pet.foto.url}
+          alt={pet.nome}
+          className="w-24 h-24 object-cover rounded-full mb-2"
+        />
       )}
       <div className="font-bold text-lg mb-1">{pet.nome}</div>
       <div className="text-gray-600">{pet.raca}</div>

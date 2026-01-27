@@ -5,7 +5,12 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   gradient?: boolean;
 }
 
-export default function Button({ children, gradient = true, className = '', ...props }: ButtonProps) {
+export default function Button({
+  children,
+  gradient = true,
+  className = '',
+  ...props
+}: ButtonProps) {
   const base = gradient
     ? 'bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-500 text-white'
     : 'bg-blue-600 hover:bg-blue-700 text-white';

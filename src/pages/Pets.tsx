@@ -81,7 +81,7 @@ export default function Pets() {
         {pets
           .filter(
             (pet) =>
-              search.trim() === '' || pet.name.toLowerCase().includes(search.trim().toLowerCase()),
+              search.trim() === '' || pet.nome.toLowerCase().includes(search.trim().toLowerCase()),
           )
           .map((pet) => (
             <CardPet key={pet.id} pet={pet} />
