@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import PlusIcon from '../assets/PlusIcon.svg';
+
+import PlusIcon from '../assets/PlusIcon.svg?react';
 
 interface FabButtonProps {
   open: boolean;
@@ -18,17 +19,7 @@ export function FabButton({ open, onToggle, children }: FabButtonProps) {
         type="button"
       >
         <span className="flex items-center justify-center">
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="16" cy="16" r="16" fill="currentColor" fill-opacity="0" />
-            <rect x="14" y="4" width="4" height="24" rx="2" fill="currentColor" />
-            <rect x="4" y="14" width="24" height="4" rx="2" fill="currentColor" />
-          </svg>
+          <PlusIcon width={32} height={32} />
         </span>
       </button>
     </div>
