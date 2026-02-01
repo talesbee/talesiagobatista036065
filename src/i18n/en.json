@@ -22,5 +22,19 @@
   "tutors": {
     "title": "Tutors",
     "addTutor": "Add Tutor"
+  },
+  "petForm": {
+    "photoAlt": "Pet Photo",
+    "addPhoto": "Add photo",
+    "changePhoto": "Change photo",
+    "removePhoto": "Remove photo",
+    "editTitle": "Edit Pet",
+    "createTitle": "Register Pet",
+    "name": "Name",
+    "age": "Age",
+    "breed": "Breed",
+    "save": "Save Changes",
+    "register": "Register",
+    "cancel": "Cancel"
   }
 }
