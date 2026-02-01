@@ -1,4 +1,4 @@
-import { Warning } from '../assets/icons';
+import { Warning, Edit } from '../assets/icons';
 import { Pet } from '../types';
 import { useTranslation } from 'react-i18next';
 
@@ -11,9 +11,22 @@ export default function CardPet({ pet, onClick }: CardPetProps) {
   const { t } = useTranslation();
   return (
     <div
-      className="bg-white rounded shadow p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition"
-      onClick={onClick}
+      className="bg-white rounded shadow p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition relative"
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
     >
+      <button
+        type="button"
+        className="absolute top-2 right-2 p-1 rounded-full bg-white shadow hover:bg-gray-100 z-10"
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick && onClick();
+        }}
+        aria-label={t('cardPet.edit')}
+      >
+        <Edit className="w-6 h-6 text-blue-500" />
+      </button>
       {pet.foto && pet.foto.url ? (
         <img
           src={pet.foto.url}
