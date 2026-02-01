@@ -18,10 +18,13 @@
     "add": "+",
     "addPet": "Add Pet",
     "search": "Search pet by name..."
+     ,"searchBtn": "Search"
   },
   "tutors": {
     "title": "Tutors",
-    "addTutor": "Add Tutor"
+    "addTutor": "Add Tutor",
+    "search": "Search tutor by name...",
+    "searchBtn": "Search"
   },
   "petForm": {
     "photoAlt": "Pet Photo",
@@ -36,13 +39,11 @@
     "save": "Save Changes",
     "register": "Register",
     "cancel": "Cancel"
-  }
-  ,
+  },
   "cardPet": {
     "breed": "Breed",
     "age": "Age"
-  }
-  ,
+  },
   "petDetails": {
     "loading": "Loading pet data.",
     "errorLoading": "Error loading pet data.",

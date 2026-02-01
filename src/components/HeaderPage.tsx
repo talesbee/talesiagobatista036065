@@ -40,7 +40,7 @@ export const HeaderPage: React.FC<HeaderProps> = ({ searchInput, setSearchInput,
             aria-label={t('tutors.title')}
           >
             <TutorIcon style={{ width: 60, height: 60 }} className="text-brand-blue" />
-            <span className="text-brand-blue">Tutores</span>
+            <span className="text-brand-blue">{t('tutors.title')}</span>
           </button>
         )}
         {location.pathname === '/tutores' && (
@@ -51,7 +51,7 @@ export const HeaderPage: React.FC<HeaderProps> = ({ searchInput, setSearchInput,
             aria-label={t('pets.title')}
           >
             <PetIcon style={{ width: 60, height: 60 }} className="text-brand-blue" />
-            <span className="text-brand-blue">Pets</span>
+            <span className="text-brand-blue">{t('pets.title')}</span>
           </button>
         )}
       </nav>

@@ -18,10 +18,13 @@
     "add": "+",
     "addPet": "Adicionar Pet",
     "search": "Buscar por nome do pet..."
+     ,"searchBtn": "Pesquisar"
   },
   "tutors": {
     "title": "Tutores",
-    "addTutor": "Adicionar Tutor"
+    "addTutor": "Adicionar Tutor",
+    "search": "Buscar por nome do tutor...",
+    "searchBtn": "Pesquisar"
   },
   "petForm": {
     "photoAlt": "Foto do Pet",
@@ -36,13 +39,11 @@
     "save": "Salvar Alterações",
     "register": "Cadastrar",
     "cancel": "Cancelar"
-  }
-  ,
+  },
   "cardPet": {
     "breed": "Raça",
     "age": "Idade"
-  }
-  ,
+  },
   "petDetails": {
     "loading": "Carregando dados do pet.",
     "errorLoading": "Erro ao carregar dados do pet.",
