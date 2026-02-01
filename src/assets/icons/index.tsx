@@ -5,5 +5,7 @@ import Error from './Error.svg?react';
 import Success from './Success.svg?react';
 import Loading from './Loading.svg?react';
 import Warning from './Warning.svg?react';
+import PetIcon from './Pet.svg?react';
+import TutorIcon from './Tutors.svg?react';
 
-export { Close, Upload, Edit, Error, Success, Loading, Warning };
+export { Close, Upload, Edit, Error, Success, Loading, Warning, PetIcon, TutorIcon };
