@@ -1,4 +1,4 @@
-import { Pet } from '../services/petService';
+import { Pet } from '../types';
 
 interface CardPetProps {
   pet: Pet;
