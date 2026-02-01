@@ -37,4 +37,25 @@
     "register": "Register",
     "cancel": "Cancel"
   }
+  ,
+  "cardPet": {
+    "breed": "Breed",
+    "age": "Age"
+  }
+  ,
+  "petDetails": {
+    "loading": "Loading pet data.",
+    "errorLoading": "Error loading pet data.",
+    "saving": "Saving pet.",
+    "successSave": "Pet saved successfully!",
+    "errorSave": "Error saving pet.",
+    "confirmChangePhoto": "Are you sure you want to change the photo?",
+    "sendingPhoto": "Uploading photo.",
+    "successPhoto": "Photo uploaded successfully!",
+    "errorPhoto": "Error uploading photo.",
+    "confirmRemovePhoto": "Are you sure you want to remove the photo?",
+    "removingPhoto": "Removing photo...",
+    "successRemovePhoto": "Photo removed successfully!",
+    "errorRemovePhoto": "Error removing photo."
+  }
 }

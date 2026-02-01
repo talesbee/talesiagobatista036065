@@ -37,4 +37,25 @@
     "register": "Cadastrar",
     "cancel": "Cancelar"
   }
+  ,
+  "cardPet": {
+    "breed": "Raça",
+    "age": "Idade"
+  }
+  ,
+  "petDetails": {
+    "loading": "Carregando dados do pet.",
+    "errorLoading": "Erro ao carregar dados do pet.",
+    "saving": "Salvando pet.",
+    "successSave": "Pet salvo com sucesso!",
+    "errorSave": "Erro ao salvar pet.",
+    "confirmChangePhoto": "Tem certeza que deseja trocar a foto?",
+    "sendingPhoto": "Enviando foto.",
+    "successPhoto": "Foto enviada com sucesso!",
+    "errorPhoto": "Erro ao enviar foto.",
+    "confirmRemovePhoto": "Tem certeza que deseja remover a foto?",
+    "removingPhoto": "Removendo foto...",
+    "successRemovePhoto": "Foto removida com sucesso!",
+    "errorRemovePhoto": "Erro ao remover foto."
+  }
 }

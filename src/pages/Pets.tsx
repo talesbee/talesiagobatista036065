@@ -88,17 +88,17 @@ export default function Pets() {
             <CardPet key={pet.id} pet={pet} onClick={() => navigate(`/pets/${pet.id}`)} />
           ))}
       </div>
-      <div className="flex justify-center items-center gap-2">
+      <div className="fixed bottom-0 left-0 w-full flex justify-center items-center gap-2 py-3">
         <Button
-          className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 rounded bg-gray-200"
           onClick={() => setPage((p) => Math.max(0, p - 1))}
           disabled={page === 0}
         >
           {t('pets.prev')}
         </Button>
-        <span className="px-2">{t('pets.page', { page, pageCount })}</span>
+        <span className="px-2">{t('pets.page', { page: page + 1, pageCount: pageCount + 1 })}</span>
         <Button
-          className="px-3 py-1 rounded bg-gray-200 disabled:opacity-50"
+          className="px-3 py-1 rounded bg-gray-200"
           onClick={() => setPage((p) => Math.min(pageCount, p + 1))}
           disabled={page === pageCount}
         >
