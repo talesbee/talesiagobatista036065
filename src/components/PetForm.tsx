@@ -1,9 +1,10 @@
-import React, { useState, ChangeEvent, FormEvent, useRef } from 'react';
+import React, { useState, ChangeEvent, FormEvent, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PetFormData } from '../types';
 import Pet_default from '../assets/pet_default.png';
 import { Close, Upload } from '../assets/icons';
 import Button from './Button';
+import { useNavigate } from 'react-router-dom';
 
 interface PetFormProps {
   initialData?: Partial<PetFormData>;
@@ -24,6 +25,7 @@ const PetForm: React.FC<PetFormProps> = ({
   onRemovePhoto,
   onChangePhoto,
 }) => {
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const [form, setForm] = useState<PetFormData>({
     nome: initialData.nome || '',
@@ -31,24 +33,45 @@ const PetForm: React.FC<PetFormProps> = ({
     raca: initialData.raca || '',
     foto: null,
   });
+  const [isDirty, setIsDirty] = useState(false);
+
+  useEffect(() => {
+    setForm({
+      nome: initialData.nome || '',
+      idade: initialData.idade || 0,
+      raca: initialData.raca || '',
+      foto: null,
+    });
+  }, [initialData.nome, initialData.idade, initialData.raca]);
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handlePhotoChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
+    if (file) {
+      setForm((prev) => ({ ...prev, foto: file }));
+      if (onChangePhoto) onChangePhoto(file);
+    }
+  };
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: name === 'idade' ? Number(value) : value }));
-  };
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      setForm((prev) => ({ ...prev, foto: e.target.files![0] }));
-      if (onChangePhoto) onChangePhoto(e.target.files[0]);
-    }
+    setIsDirty(true);
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     onSubmit(form);
+    setIsDirty(false);
+  };
+
+  const handleRemovePhoto = () => {
+    setForm((prev) => ({ ...prev, foto: null }));
+    if (fileInputRef.current) {
+      fileInputRef.current.value = '';
+    }
+    if (onRemovePhoto) onRemovePhoto();
   };
 
   return (
@@ -65,13 +88,23 @@ const PetForm: React.FC<PetFormProps> = ({
 
         <div className="flex flex-col items-center relative">
           <img
-            src={currentPhotoUrl || Pet_default}
+            src={
+              currentPhotoUrl || (form.foto ? URL.createObjectURL(form.foto) : null) || Pet_default
+            }
             alt={t('petForm.photoAlt')}
             className="w-36 h-36 object-cover rounded-full border-4 border-white shadow-lg bg-gray-100"
             style={{ boxShadow: '0 4px 16px rgba(0,0,0,0.10)' }}
           />
 
-          {!currentPhotoUrl && (
+          <input
+            type="file"
+            accept="image/*"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            onChange={handlePhotoChange}
+          />
+
+          {!currentPhotoUrl && !form.foto && (
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 group flex items-center">
               <button
                 type="button"
@@ -90,7 +123,7 @@ const PetForm: React.FC<PetFormProps> = ({
         </div>
 
         <div className="flex-1 flex justify-start pl-4">
-          {currentPhotoUrl && (
+          {(currentPhotoUrl || form.foto) && (
             <div className="flex flex-col gap-3 items-center">
               <div className="relative group flex items-center">
                 <button
@@ -109,7 +142,7 @@ const PetForm: React.FC<PetFormProps> = ({
                 <button
                   type="button"
                   className="bg-white/80 hover:bg-red-500/80 text-red-500 hover:text-white rounded-full p-2 shadow transition flex items-center justify-center"
-                  onClick={onRemovePhoto}
+                  onClick={handleRemovePhoto}
                   aria-label={t('petForm.removePhoto')}
                 >
                   <Close className="w-8 h-8" />
@@ -171,7 +204,7 @@ const PetForm: React.FC<PetFormProps> = ({
           type="submit"
           variant="confirm"
           className="btn btn-primary py-2 text-base font-bold"
-          disabled={isLoading}
+          disabled={isEdit && !isDirty}
         >
           {isEdit ? t('petForm.save') : t('petForm.register')}
         </Button>
@@ -181,7 +214,7 @@ const PetForm: React.FC<PetFormProps> = ({
           type="button"
           variant="cancel"
           className="btn btn-secondary py-2 text-base font-bold"
-          onClick={() => window.history.back()}
+          onClick={() => navigate('/pets')}
         >
           {t('petForm.cancel')}
         </Button>
