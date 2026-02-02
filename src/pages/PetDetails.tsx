@@ -35,7 +35,12 @@ const PetDetails: React.FC = () => {
           setModal((m) => ({ ...m, isOpen: false }));
         })
         .catch(() => {
-          setModal({ isOpen: true, status: 'error', message: t('petDetails.errorLoading') });
+          setModal({
+            isOpen: true,
+            status: 'error',
+            message: t('petDetails.errorLoading'),
+            onConfirm: () => navigate('/pets'),
+          });
         });
     }
   }, [id, isEdit]);
