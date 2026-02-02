@@ -9,7 +9,7 @@
     "error": "Usuário ou senha inválidos"
   },
   "pets": {
-    "title": "Pet Manager MT",
+    "title": "Pets",
     "loading": "Carregando pets...",
     "error": "Erro ao carregar pets",
     "prev": "Anterior",
@@ -17,11 +17,38 @@
     "page": "Página {{page}} de {{pageCount}}",
     "add": "+",
     "addPet": "Adicionar Pet",
-    "search": "Buscar por nome do pet..."
+    "search": "Buscar por nome do pet...",
+    "searchBtn": "Pesquisar",
+    "notFound": "Nenhum pet encontrado"
   },
   "tutors": {
     "title": "Tutores",
-    "addTutor": "Adicionar Tutor"
+    "addTutor": "Adicionar Tutor",
+    "search": "Buscar por nome do tutor...",
+    "searchBtn": "Pesquisar",
+    "editTitle": "Editar Tutor",
+    "createTitle": "Cadastrar Tutor",
+    "name": "Nome",
+    "email": "E-mail",
+    "phone": "Telefone",
+    "cpf": "CPF",
+    "address": "Endereço",
+    "notFound": "Nenhum tutor encontrado"
+  },
+  "tutorDetails": {
+    "loading": "Carregando dados do tutor.",
+    "errorLoading": "Erro ao carregar dados do tutor.",
+    "saving": "Salvando tutor...",
+    "successSave": "Tutor salvo com sucesso!",
+    "errorSave": "Erro ao salvar tutor.",
+    "confirmChangePhoto": "Tem certeza que deseja trocar a foto?",
+    "sendingPhoto": "Enviando foto...",
+    "successPhoto": "Foto enviada com sucesso!",
+    "errorPhoto": "Erro ao enviar foto.",
+    "confirmRemovePhoto": "Tem certeza que deseja remover a foto?",
+    "removingPhoto": "Removendo foto...",
+    "successRemovePhoto": "Foto removida com sucesso!",
+    "errorRemovePhoto": "Erro ao remover foto."
   },
   "petForm": {
     "photoAlt": "Foto do Pet",
@@ -36,13 +63,11 @@
     "save": "Salvar Alterações",
     "register": "Cadastrar",
     "cancel": "Cancelar"
-  }
-  ,
+  },
   "cardPet": {
     "breed": "Raça",
     "age": "Idade"
-  }
-  ,
+  },
   "petDetails": {
     "loading": "Carregando dados do pet.",
     "errorLoading": "Erro ao carregar dados do pet.",
@@ -56,6 +81,11 @@
     "confirmRemovePhoto": "Tem certeza que deseja remover a foto?",
     "removingPhoto": "Removendo foto...",
     "successRemovePhoto": "Foto removida com sucesso!",
-    "errorRemovePhoto": "Erro ao remover foto."
+    "errorRemovePhoto": "Erro ao remover foto.",
+    "back": "Voltar",
+    "tutorsTitle": "Tutores do Pet",
+    "confirmRemoveTutor": "Tem certeza que deseja remover este tutor do pet?",
+    "successRemoveTutor": "Tutor removido com sucesso!",
+    "removingTutor": "Removendo tutor do pet..."
   }
 }
