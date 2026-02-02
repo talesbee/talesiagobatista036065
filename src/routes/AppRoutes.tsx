@@ -8,6 +8,9 @@ export default function AppRoutes() {
   const Tutors = lazy(() => import('../pages/Tutors'));
   const Login = lazy(() => import('../pages/Login'));
   const PetDetails = lazy(() => import('../pages/PetDetails'));
+  const PetView = lazy(() => import('../pages/PetView'));
+  const TutorDetails = lazy(() => import('../pages/TutorDetails'));
+  const TutorView = lazy(() => import('../pages/TutorView'));
 
   const { t } = useTranslation();
   return (
@@ -49,10 +52,42 @@ export default function AppRoutes() {
             }
           />
           <Route
+            path="/petsview/:id"
+            element={
+              <ProtectedRoute>
+                <PetView />
+              </ProtectedRoute>
+            }
+          />
+          <Route
             path="/tutores"
             element={
               <ProtectedRoute>
                 <Tutors />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutores/novo"
+            element={
+              <ProtectedRoute>
+                <TutorDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutores/:id"
+            element={
+              <ProtectedRoute>
+                <TutorDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutoresview/:id"
+            element={
+              <ProtectedRoute>
+                <TutorView />
               </ProtectedRoute>
             }
           />
