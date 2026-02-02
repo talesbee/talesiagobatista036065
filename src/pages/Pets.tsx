@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getPets } from '../services/petService';
-import { CardPet, Button } from '../components';
+import { CardPet, Button, HeaderPage } from '../components';
 import { FabButton } from '../components/FabButton';
 import { Pet, PetsResponse } from '../types';
 
@@ -17,6 +17,7 @@ export default function Pets() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const fabRef = useRef<HTMLDivElement>(null);
+  const [searchInput, setSearchInput] = useState('');
 
   useEffect(() => {
     if (!fabOpen) return;
@@ -33,7 +34,7 @@ export default function Pets() {
 
   useEffect(() => {
     setLoading(true);
-    getPets(page)
+    getPets(page, 10, search)
       .then((res: PetsResponse) => {
         setPets(res.content);
         setPageCount(res.pageCount - 1);
@@ -43,8 +44,7 @@ export default function Pets() {
         setError(t('pets.error'));
         setLoading(false);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page, t]);
+  }, [page, t, search]);
 
   if (loading)
     return (
@@ -59,35 +59,23 @@ export default function Pets() {
 
   return (
     <div className="flex-1 p-3 pt-4 relative">
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-blue-700">{t('pets.title')}</h1>
-        <Button
-          className="flex items-center gap-2 px-3 py-1 rounded bg-gray-100 hover:bg-blue-100 text-blue-700 border border-blue-200"
-          onClick={() => navigate('/tutors')}
-        >
-          <span className="material-icons text-base">group</span>
-          {t('tutors.title')}
-        </Button>
+      <HeaderPage
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        onSearch={() => {
+          setSearch(searchInput);
+          setPage(0);
+        }}
+      />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6 px-8">
+        {pets.length === 0 ? (
+          <div className="col-span-full text-center text-gray-500 py-8">{t('pets.notFound')}</div>
+        ) : (
+          pets.map((pet) => <CardPet key={pet.id} pet={pet} />)
+        )}
       </div>
-      <div className="flex items-center justify-center mb-6">
-        <input
-          type="text"
-          className="w-full sm:w-64 px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-300"
-          placeholder={t('pets.search')}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-6">
-        {pets
-          .filter(
-            (pet) =>
-              search.trim() === '' || pet.nome.toLowerCase().includes(search.trim().toLowerCase()),
-          )
-          .map((pet) => (
-            <CardPet key={pet.id} pet={pet} onClick={() => navigate(`/pets/${pet.id}`)} />
-          ))}
-      </div>
+
       <div className="fixed bottom-0 left-0 w-full flex justify-center items-center gap-2 py-3">
         <Button
           className="px-3 py-1 rounded bg-gray-200"
@@ -105,6 +93,7 @@ export default function Pets() {
           {t('pets.next')}
         </Button>
       </div>
+
       <div ref={fabRef} className="inline-block">
         <FabButton open={fabOpen} onToggle={() => setFabOpen((open) => !open)}>
           <Button
@@ -115,15 +104,6 @@ export default function Pets() {
             }}
           >
             <span className="material-icons text-1xl">{t('pets.addPet')}</span>
-          </Button>
-          <Button
-            className="flex items-center justify-end rounded-full bg-green-600 hover:bg-green-700 text-white shadow-lg text-lg min-w-0 px-3 py-2"
-            onClick={() => {
-              setFabOpen(false);
-              alert('Adicionar Tutor (em breve)');
-            }}
-          >
-            <span className="material-icons text-1xl">{t('tutors.addTutor')}</span>
           </Button>
         </FabButton>
       </div>

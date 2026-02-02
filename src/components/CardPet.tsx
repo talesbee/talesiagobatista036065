@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { Warning, Edit } from '../assets/icons';
 import { Pet } from '../types';
 import { useTranslation } from 'react-i18next';
@@ -7,13 +8,15 @@ interface CardPetProps {
   onClick?: () => void;
 }
 
-export default function CardPet({ pet, onClick }: CardPetProps) {
+export default function CardPet({ pet }: CardPetProps) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <div
       className="bg-white rounded shadow p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition relative"
       onClick={(e) => {
         e.stopPropagation();
+        navigate(`/petsview/${pet.id}`);
       }}
     >
       <button
@@ -21,7 +24,7 @@ export default function CardPet({ pet, onClick }: CardPetProps) {
         className="absolute top-2 right-2 p-1 rounded-full bg-white shadow hover:bg-gray-100 z-10"
         onClick={(e) => {
           e.stopPropagation();
-          onClick && onClick();
+          navigate(`/pets/${pet.id}`);
         }}
         aria-label={t('cardPet.edit')}
       >
