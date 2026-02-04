@@ -6,15 +6,24 @@ import { useTranslation } from 'react-i18next';
 
 interface PetListItemProps {
   pet: Partial<Pet>;
-  onRemove: () => void;
-  removeLabel: string;
+  onRemove?: () => void;
+  removeLabel?: string;
+  onClick?: () => void;
+  showRemove?: boolean;
 }
 
-const PetListItem: React.FC<PetListItemProps> = ({ pet, onRemove, removeLabel }) => {
+const PetListItem: React.FC<PetListItemProps> = ({
+  pet,
+  onRemove,
+  removeLabel,
+  onClick,
+  showRemove = true,
+}) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const handleItemClick = (e: React.MouseEvent) => {
-    if ((e.target as HTMLElement).closest('button')) return;
+    if ((e.target as HTMLElement).closest('.remove-btn')) return;
+    if (onClick) return onClick();
     navigate(`/petsview/${pet.id}`);
   };
   return (
@@ -45,17 +54,19 @@ const PetListItem: React.FC<PetListItemProps> = ({ pet, onRemove, removeLabel })
           {t('petForm.age')}: {pet.idade}
         </div>
       </div>
-      <button
-        type="button"
-        className="ml-2 p-2 rounded-full bg-white shadow hover:bg-gray-100"
-        aria-label={removeLabel}
-        onClick={(e) => {
-          e.stopPropagation();
-          onRemove();
-        }}
-      >
-        <Close className="w-5 h-5 text-red-500" />
-      </button>
+      {showRemove && onRemove && (
+        <button
+          type="button"
+          className="ml-2 p-2 rounded-full bg-white shadow hover:bg-gray-100 remove-btn"
+          aria-label={removeLabel}
+          onClick={(e) => {
+            e.stopPropagation();
+            onRemove();
+          }}
+        >
+          <Close className="w-5 h-5 text-red-500" />
+        </button>
+      )}
     </li>
   );
 };
