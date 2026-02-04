@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPetById, deletePetPhoto } from '../services/petService';
 import { unlinkTutorPet } from '../services/tutorService';
+import { petFacade } from '../state/PetFacade';
 import { Pet } from '../types';
 import { Button, Modal, TutorListItem } from '../components';
 import { Warning, Edit } from '../assets/icons';
@@ -59,7 +59,7 @@ const PetView: React.FC = () => {
         setModal({ isOpen: true, status: 'loading', message: labels.removingTutor });
         try {
           await unlinkTutorPet(tutorId, Number(id));
-          const updated = await getPetById(Number(id));
+          const updated = await petFacade.getPetById(Number(id));
           setPet(updated);
           setModal({ isOpen: true, status: 'success', message: labels.successRemoveTutor });
           setTimeout(() => closeModal(), 2000);
@@ -74,7 +74,8 @@ const PetView: React.FC = () => {
   useEffect(() => {
     if (id) {
       setLoading(true);
-      getPetById(Number(id))
+      petFacade
+        .getPetById(Number(id))
         .then((data) => {
           setPet(data);
           setLoading(false);

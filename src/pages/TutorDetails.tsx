@@ -1,13 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  getTutorById,
-  postTutor,
-  putTutor,
-  uploadTutorPhoto,
-  deleteTutorPhoto,
-} from '../services/tutorService';
+import { tutorFacade } from '../state/TutorFacade';
 import { Tutor, TutorPayload } from '../types';
 import { Modal, TutorForm } from '../components';
 
@@ -28,7 +22,8 @@ const TutorDetails: React.FC = () => {
   useEffect(() => {
     if (isEdit && id) {
       setModal({ isOpen: true, status: 'loading', message: t('tutorDetails.loading') });
-      getTutorById(Number(id))
+      tutorFacade
+        .getTutorById(Number(id))
         .then((data) => {
           setTutor(data);
           setModal((m) => ({ ...m, isOpen: false }));
@@ -64,13 +59,14 @@ const TutorDetails: React.FC = () => {
           cpf: Number(data.cpf),
         };
         if (isEdit && id) {
-          await putTutor(Number(id), payload);
+          const updated = await tutorFacade.updateTutor(Number(id), payload as any);
+          tutorId = updated.id;
         } else {
-          const res = await postTutor(payload);
+          const res = await tutorFacade.createTutor(payload as any);
           tutorId = res.id;
         }
         if (data.foto && tutorId) {
-          await uploadTutorPhoto(tutorId, data.foto);
+          await tutorFacade.uploadPhoto(tutorId, data.foto as File);
         }
         setModal({ isOpen: true, status: 'success', message: t('tutorDetails.successSave') });
         setTimeout(() => {
@@ -102,8 +98,8 @@ const TutorDetails: React.FC = () => {
         onConfirm: async () => {
           setModal({ isOpen: true, status: 'loading', message: t('tutorDetails.sendingPhoto') });
           try {
-            await uploadTutorPhoto(Number(id), file);
-            const updated = await getTutorById(Number(id));
+            await tutorFacade.uploadPhoto(Number(id), file);
+            const updated = await tutorFacade.getTutorById(Number(id));
             setTutor(updated);
             setModal({ isOpen: true, status: 'success', message: t('tutorDetails.successPhoto') });
             setTimeout(() => setModal((m) => ({ ...m, isOpen: false })), 2000);
@@ -126,8 +122,8 @@ const TutorDetails: React.FC = () => {
         if (!tutor || !tutor.foto?.id) return;
         setModal({ isOpen: true, status: 'loading', message: t('tutorDetails.removingPhoto') });
         try {
-          await deleteTutorPhoto(Number(id), tutor.foto.id);
-          const updated = await getTutorById(Number(id));
+          await tutorFacade.deletePhoto(Number(id), tutor.foto.id);
+          const updated = await tutorFacade.getTutorById(Number(id));
           setTutor(updated);
           setModal({
             isOpen: true,

@@ -2,13 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
 import PetForm from '../components/PetForm';
-import {
-  deletePetPhoto,
-  getPetById,
-  postPet,
-  putPet,
-  uploadPetPhoto,
-} from '../services/petService';
+import { petFacade } from '../state/PetFacade';
 import { Pet, PetPayload, PetFormData } from '../types';
 import { Modal } from '../components';
 
@@ -29,7 +23,8 @@ const PetDetails: React.FC = () => {
   useEffect(() => {
     if (isEdit && id) {
       setModal({ isOpen: true, status: 'loading', message: t('petDetails.loading') });
-      getPetById(Number(id))
+      petFacade
+        .getPetById(Number(id))
         .then((data) => {
           setPet(data);
           setModal((m) => ({ ...m, isOpen: false }));
@@ -55,13 +50,14 @@ const PetDetails: React.FC = () => {
       };
       let petId: number | undefined = id ? Number(id) : undefined;
       if (isEdit && id) {
-        await putPet(Number(id), payload);
+        const updated = await petFacade.updatePet(Number(id), payload);
+        petId = updated.id;
       } else {
-        const res = await postPet(payload);
+        const res = await petFacade.createPet(payload as any);
         petId = res.id;
       }
       if (data.foto && petId) {
-        await uploadPetPhoto(petId, data.foto);
+        await petFacade.uploadPhoto(petId, data.foto as File);
       }
       setModal({ isOpen: true, status: 'success', message: t('petDetails.successSave') });
       setTimeout(() => {
@@ -87,8 +83,8 @@ const PetDetails: React.FC = () => {
         onConfirm: async () => {
           setModal({ isOpen: true, status: 'loading', message: t('petDetails.sendingPhoto') });
           try {
-            await uploadPetPhoto(Number(id), file);
-            const updated = await getPetById(Number(id));
+            await petFacade.uploadPhoto(Number(id), file);
+            const updated = await petFacade.getPetById(Number(id));
             setPet(updated);
             setModal({ isOpen: true, status: 'success', message: t('petDetails.successPhoto') });
             setTimeout(() => setModal((m) => ({ ...m, isOpen: false })), 2000);
@@ -111,8 +107,8 @@ const PetDetails: React.FC = () => {
         if (!pet || !pet.foto?.id) return;
         setModal({ isOpen: true, status: 'loading', message: t('petDetails.removingPhoto') });
         try {
-          await deletePetPhoto(Number(id), pet.foto.id);
-          const updated = await getPetById(Number(id));
+          await petFacade.deletePhoto(Number(id), pet.foto.id);
+          const updated = await petFacade.getPetById(Number(id));
           setPet(updated);
           setModal({
             isOpen: true,

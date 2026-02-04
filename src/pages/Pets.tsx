@@ -1,13 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getPets } from '../services/petService';
 import { CardPet, Button, HeaderPage } from '../components';
 import { FabButton } from '../components/FabButton';
-import { Pet, PetsResponse } from '../types';
+import { PetsResponse } from '../types';
+import { usePetFacade } from '../state/usePetFacade';
+import { petFacade } from '../state/PetFacade';
 
 export default function Pets() {
-  const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
@@ -32,11 +32,13 @@ export default function Pets() {
     };
   }, [fabOpen]);
 
+  const { pets } = usePetFacade();
+
   useEffect(() => {
     setLoading(true);
-    getPets(page, 10, search)
+    petFacade
+      .loadPets(page, 10, search)
       .then((res: PetsResponse) => {
-        setPets(res.content);
         setPageCount(res.pageCount - 1);
         setLoading(false);
       })
