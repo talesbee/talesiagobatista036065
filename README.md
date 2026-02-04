@@ -70,8 +70,6 @@ npm run dev
   traduzidos.
 - **Como adicionar um idioma:** adicionar o JSON em `src/i18n/`, registrá-lo em `src/i18n/index.ts`
   e expandir `LanguageSelector.tsx`.
-- **Persistência:** atualmente a preferência é mantida em memória; para persistir entre reloads, use
-  `i18next-browser-languagedetector` ou salve em `localStorage`.
 
 ## Health (Liveness / Readiness)
 
