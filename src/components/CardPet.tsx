@@ -1,22 +1,53 @@
-import { Pet } from '../services/petService';
+import { useNavigate } from 'react-router-dom';
+import { Warning, Edit } from '../assets/icons';
+import { Pet } from '../types';
+import { useTranslation } from 'react-i18next';
 
 interface CardPetProps {
   pet: Pet;
   onClick?: () => void;
 }
 
-export default function CardPet({ pet, onClick }: CardPetProps) {
+export default function CardPet({ pet }: CardPetProps) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   return (
     <div
-      className="bg-white rounded shadow p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition"
-      onClick={onClick}
+      className="bg-white rounded shadow p-4 flex flex-col items-center cursor-pointer hover:shadow-lg transition relative"
+      onClick={(e) => {
+        e.stopPropagation();
+        navigate(`/petsview/${pet.id}`);
+      }}
     >
-      {pet.foto && pet.foto.url && (
-        <img src={pet.foto.url} alt={pet.nome} className="w-24 h-24 object-cover rounded-full mb-2" />
+      <button
+        type="button"
+        className="absolute top-2 right-2 p-1 rounded-full bg-white shadow hover:bg-gray-100 z-10"
+        onClick={(e) => {
+          e.stopPropagation();
+          navigate(`/pets/${pet.id}`);
+        }}
+        aria-label={t('cardPet.edit')}
+      >
+        <Edit className="w-6 h-6 text-blue-500" />
+      </button>
+      {pet.foto && pet.foto.url ? (
+        <img
+          src={pet.foto.url}
+          alt={pet.nome}
+          className="w-24 h-24 object-cover rounded-full mb-2"
+        />
+      ) : (
+        <div className="w-24 h-24 bg-gray-200 rounded-full mb-2 flex items-center justify-center text-gray-500">
+          <Warning className="w-12 h-12" />
+        </div>
       )}
       <div className="font-bold text-lg mb-1">{pet.nome}</div>
-      <div className="text-gray-600">{pet.raca}</div>
-      <div className="text-gray-500 text-sm">Idade: {pet.idade ?? '-'}</div>
+      <div className="text-gray-600">
+        {t('cardPet.breed')}: {pet.raca}
+      </div>
+      <div className="text-gray-500 text-sm">
+        {t('cardPet.age')}: {pet.idade ?? '-'}
+      </div>
     </div>
   );
 }

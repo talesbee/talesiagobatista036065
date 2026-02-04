@@ -1,0 +1,8 @@
+{
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 100,
+  "editor.rulers": [100],
+  "prettier.printWidth": 100,
+  "prettier.proseWrap": "always"
+}

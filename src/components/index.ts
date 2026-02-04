@@ -1,6 +1,17 @@
 export { default as Button } from './Button';
 export { default as CardPet } from './CardPet';
-
+export { default as Modal } from './Modal';
 export { default as LanguageSelector } from './LanguageSelector';
-
 export { default as Header } from './Header';
+export { HeaderPage } from './HeaderPage';
+export { default as CardTutor } from './CardTutor';
+export { default as TutorForm } from './TutorForm';
+export { FabButton } from './FabButton';
+export { default as PetForm } from './PetForm';
+export { default as Input } from './Input';
+export { default as PhotoInput } from './PhotoInput';
+export { default as PetListItem } from './PetListItem';
+export { default as TutorDetailsCard } from './TutorDetailsCard';
+export { default as TutorPetsList } from './TutorPetsList';
+export { default as PetSelectModal } from './PetSelectModal';
+export { default as TutorListItem } from './TutorListItem';

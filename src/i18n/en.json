@@ -9,10 +9,103 @@
     "error": "Invalid username or password"
   },
   "pets": {
+    "title": "Pets",
     "loading": "Loading pets...",
     "error": "Failed to load pets",
     "prev": "Previous",
     "next": "Next",
-    "page": "Page {{page}} of {{pageCount}}"
+    "page": "Page {{page}} of {{pageCount}}",
+    "add": "+",
+    "addPet": "Add Pet",
+    "search": "Search pet by name...",
+    "searchBtn": "Search",
+    "notFound": "No pet found"
+  },
+  "tutors": {
+    "title": "Tutors",
+    "loading": "Loading tutors...",
+    "addTutor": "Add Tutor",
+    "search": "Search tutor by name...",
+    "searchBtn": "Search",
+    "editTitle": "Edit Tutor",
+    "edit": "Edit",
+    "createTitle": "Register Tutor",
+    "name": "Name",
+    "email": "Email",
+    "phone": "Phone",
+    "cpf": "CPF",
+    "address": "Address",
+    "notFound": "No tutor found"
+  },
+  "tutorDetails": {
+    "loading": "Loading tutor data.",
+    "errorLoading": "Error loading tutor data.",
+    "saving": "Saving tutor...",
+    "successSave": "Tutor saved successfully!",
+    "errorSave": "Error saving tutor.",
+    "confirmChangePhoto": "Are you sure you want to change the photo?",
+    "sendingPhoto": "Uploading photo...",
+    "successPhoto": "Photo uploaded successfully!",
+    "errorPhoto": "Error uploading photo.",
+    "confirmRemovePhoto": "Are you sure you want to remove the photo?",
+    "removingPhoto": "Removing photo...",
+    "successRemovePhoto": "Photo removed successfully!",
+    "errorRemovePhoto": "Error removing photo.",
+    "petsTitle": "Tutor's Pets",
+    "removePet": "Remove pet link",
+    "confirmRemoveTutor": "Are you sure you want to remove this pet link?",
+    "removingTutor": "Removing pet link...",
+    "successRemoveTutor": "Pet link removed successfully!",
+    "errorRemoveTutor": "Error removing pet link."
+  },
+  "petForm": {
+    "photoAlt": "Pet Photo",
+    "addPhoto": "Add photo",
+    "changePhoto": "Change photo",
+    "removePhoto": "Remove photo",
+    "editTitle": "Edit Pet",
+    "createTitle": "Register Pet",
+    "name": "Name",
+    "age": "Age",
+    "breed": "Breed",
+    "save": "Save Changes",
+    "register": "Register",
+    "cancel": "Cancel"
+  },
+  "cardPet": {
+    "breed": "Breed",
+    "age": "Age",
+    "edit": "Edit"
+  },
+  "petDetails": {
+    "loading": "Loading pet data.",
+    "errorLoading": "Error loading pet data.",
+    "saving": "Saving pet.",
+    "successSave": "Pet saved successfully!",
+    "errorSave": "Error saving pet.",
+    "confirmChangePhoto": "Are you sure you want to change the photo?",
+    "sendingPhoto": "Uploading photo.",
+    "successPhoto": "Photo uploaded successfully!",
+    "errorPhoto": "Error uploading photo.",
+    "confirmRemovePhoto": "Are you sure you want to remove the photo?",
+    "removingPhoto": "Removing photo...",
+    "successRemovePhoto": "Photo removed successfully!",
+    "errorRemovePhoto": "Error removing photo.",
+    "back": "Back",
+    "tutorsTitle": "Pet's Tutors",
+    "confirmRemoveTutor": "Are you sure you want to remove this tutor from the pet?",
+    "removingTutor": "Removing tutor from pet...",
+    "successRemoveTutor": "Tutor removed successfully!"
+  },
+  "petSelect": {
+    "title": "Link Pet to Tutor",
+    "confirmTitle": "Confirm link",
+    "confirmMessage": "Do you want to link pet {{name}} to this tutor?",
+    "confirm": "Confirm",
+    "linking": "Linking...",
+    "link": "Link Pet"
+  },
+  "modal": {
+    "close": "Close"
   }
 }
