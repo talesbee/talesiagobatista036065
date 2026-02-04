@@ -4,7 +4,7 @@ import { Pet } from '../types';
 import { Button, PetListItem } from '../components';
 import { useTranslation } from 'react-i18next';
 import { linkTutorPet } from '../services/tutorService';
-import { getPets } from '../services/petService';
+import { petFacade } from '../state/PetFacade';
 import { Close } from '../assets/icons';
 
 interface ModalPortalProps {
@@ -82,7 +82,8 @@ const PetSelectModal: React.FC<PetSelectModalProps> = ({
   useEffect(() => {
     if (!isOpen) return;
     setLoading(true);
-    getPets(page - 1, PAGE_SIZE, search)
+    petFacade
+      .loadPets(page - 1, PAGE_SIZE, search)
       .then((res) => {
         let available = res.content;
         if (typeof petsLinked !== 'undefined' && petsLinked && petsLinked.length > 0) {
