@@ -2,24 +2,24 @@ import { describe, it, expect } from 'vitest';
 import StateFacade from './StateFacade';
 
 describe('StateFacade', () => {
-  it('should return initial state', () => {
+  it('deve retornar o estado inicial', () => {
     const f = new StateFacade({ a: 1 });
     expect(f.getState()).toEqual({ a: 1 });
   });
 
-  it('should set and get state', () => {
+  it('deve setar e obter o estado', () => {
     const f = new StateFacade({ a: 1 });
     f.setState({ a: 2 });
     expect(f.getState()).toEqual({ a: 2 });
   });
 
-  it('should update partial state', () => {
+  it('deve atualizar parcialmente o estado', () => {
     const f = new StateFacade({ a: 1, b: 2 });
     f.update({ b: 3 });
     expect(f.getState()).toEqual({ a: 1, b: 3 });
   });
 
-  it('should reset to initial', () => {
+  it('deve resetar para o estado inicial', () => {
     const f = new StateFacade({ a: 5 });
     f.setState({ a: 10 });
     f.reset({ a: 5 });
