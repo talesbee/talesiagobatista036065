@@ -3,9 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getTutorById, unlinkTutorPet } from '../services/tutorService';
 import { Tutor } from '../types';
-import { Button } from '../components';
-import TutorDetailsCard from '../components/TutorDetailsCard';
-import TutorPetsList from '../components/TutorPetsList';
+import {
+  Button,
+  FabButton,
+  Modal,
+  TutorDetailsCard,
+  TutorPetsList,
+  PetSelectModal,
+} from '../components';
 
 type ModalStatus = 'success' | 'warning' | 'error' | 'loading';
 interface ModalState {
@@ -23,32 +28,27 @@ const TutorView: React.FC = () => {
   const [tutor, setTutor] = useState<Tutor | null>(null);
   const [loading, setLoading] = useState(true);
   const [modal, setModal] = useState<ModalState>({ isOpen: false, status: 'success', message: '' });
+  const [fabOpen, setFabOpen] = useState(false);
+  const [petModalOpen, setPetModalOpen] = useState(false);
 
   const labels = {
     loading: t('tutors.loading'),
-    notFound: t('tutors.notFound', 'Tutor não encontrado'),
-    edit: t('tutors.edit', 'Editar'),
+    notFound: t('tutors.notFound'),
+    edit: t('tutors.edit'),
     name: t('tutors.name'),
     email: t('tutors.email'),
     phone: t('tutors.phone'),
     cpf: t('tutors.cpf'),
     address: t('tutors.address'),
-    back: t('petForm.cancel'),
-    petsTitle: t('tutorDetails.petsTitle', 'Pets do Tutor'),
-    removePet: t('tutorDetails.removePet', 'Remover vínculo do pet'),
-    confirmRemoveTutor: t(
-      'tutorDetails.confirmRemoveTutor',
-      'Tem certeza que deseja remover o vínculo deste pet?',
-    ),
-    removingTutor: t('tutorDetails.removingTutor', 'Removendo vínculo do pet...'),
-    successRemoveTutor: t(
-      'tutorDetails.successRemoveTutor',
-      'Vínculo do pet removido com sucesso!',
-    ),
-    errorRemoveTutor: t('tutorDetails.errorRemoveTutor', 'Erro ao remover vínculo do pet.'),
+    back: t('petDetails.back'),
+    petsTitle: t('tutorDetails.petsTitle'),
+    removePet: t('tutorDetails.removePet'),
+    confirmRemoveTutor: t('tutorDetails.confirmRemoveTutor'),
+    removingTutor: t('tutorDetails.removingTutor'),
+    successRemoveTutor: t('tutorDetails.successRemoveTutor'),
+    errorRemoveTutor: t('tutorDetails.errorRemoveTutor'),
   };
 
-  // Modal helpers
   const openModal = (
     status: ModalStatus,
     message: string,
@@ -59,7 +59,6 @@ const TutorView: React.FC = () => {
   };
   const closeModal = () => setModal((m) => ({ ...m, isOpen: false }));
 
-  // Remover vínculo do pet
   const handleRemovePet = (petId: number) => {
     openModal(
       'warning',
@@ -81,7 +80,6 @@ const TutorView: React.FC = () => {
     );
   };
 
-  // Editar tutor
   const handleEdit = () => {
     if (tutor) navigate(`/tutores/${tutor.id}`);
   };
@@ -118,11 +116,34 @@ const TutorView: React.FC = () => {
       {tutor.pets && tutor.pets.length > 0 && (
         <TutorPetsList pets={tutor.pets} onRemove={handleRemovePet} labels={labels} />
       )}
+      <FabButton open={fabOpen} onToggle={() => setFabOpen((prev) => !prev)}>
+        <Button variant="confirm" onClick={() => setPetModalOpen(true)}>
+          {t('petSelect.link')}
+        </Button>
+      </FabButton>
       <div className="flex justify-center mt-4">
-        <Button variant="cancel" onClick={() => navigate(-1)}>
+        <Button variant="warning" onClick={() => navigate(-1)}>
           {labels.back}
         </Button>
       </div>
+      <Modal
+        isOpen={modal.isOpen}
+        message={modal.message}
+        status={modal.status}
+        onCancel={modal.onCancel}
+        onConfirm={modal.onConfirm}
+      />
+      <PetSelectModal
+        isOpen={petModalOpen}
+        onClose={() => setPetModalOpen(false)}
+        tutorId={tutor.id}
+        petsLinked={tutor.pets}
+        onLinked={async () => {
+          if (!id) return;
+          const updated = await getTutorById(Number(id));
+          setTutor(updated);
+        }}
+      />
     </div>
   );
 };

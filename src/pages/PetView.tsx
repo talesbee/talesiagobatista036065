@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { getPetById, deletePetPhoto } from '../services/petService';
 import { unlinkTutorPet } from '../services/tutorService';
 import { Pet } from '../types';
-import { Button, Modal } from '../components';
+import { Button, Modal, TutorListItem } from '../components';
 import { Warning, Edit } from '../assets/icons';
-import TutorListItem from '../components/TutorListItem';
 
 type ModalStatus = 'success' | 'warning' | 'error' | 'loading';
 interface ModalState {
@@ -145,7 +144,7 @@ const PetView: React.FC = () => {
         </div>
       )}
       <div className="flex justify-center mt-4">
-        <Button variant="cancel" onClick={() => navigate(-1)}>
+        <Button variant="warning" onClick={() => navigate(-1)}>
           {labels.back}
         </Button>
       </div>
