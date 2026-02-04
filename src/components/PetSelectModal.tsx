@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom';
 import { Pet } from '../types';
 import { Button, PetListItem } from '../components';
 import { useTranslation } from 'react-i18next';
-import { linkTutorPet } from '../services/tutorService';
+import { tutorFacade } from '../state/TutorFacade';
 import { petFacade } from '../state/PetFacade';
 import { Close } from '../assets/icons';
 
@@ -110,7 +110,7 @@ const PetSelectModal: React.FC<PetSelectModalProps> = ({
     if (!selectedPet) return;
     setLoading(false);
     try {
-      await linkTutorPet(tutorId, selectedPet.id);
+      await tutorFacade.linkTutorPet(tutorId, selectedPet.id);
       onLinked();
       onClose();
     } catch {

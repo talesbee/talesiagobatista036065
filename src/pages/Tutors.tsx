@@ -1,12 +1,12 @@
 import { useEffect, useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getTutores } from '../services/tutorService';
 import { HeaderPage, Button, FabButton, CardTutor } from '../components';
 import { Tutor, TutorsResponse } from '../types';
+import { useTutorFacade } from '../state/useTutorFacade';
+import { tutorFacade } from '../state/TutorFacade';
 
 export default function Tutors() {
-  const [tutors, setTutors] = useState<Tutor[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [page, setPage] = useState(0);
@@ -31,11 +31,13 @@ export default function Tutors() {
     };
   }, [fabOpen]);
 
+  const { tutors } = useTutorFacade();
+
   useEffect(() => {
     setLoading(true);
-    getTutores(page, 10, search)
+    tutorFacade
+      .loadTutors(page, 10, search)
       .then((res: TutorsResponse) => {
-        setTutors(res.content);
         setPageCount(res.pageCount - 1);
         setLoading(false);
       })

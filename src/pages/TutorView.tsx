@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { getTutorById, unlinkTutorPet } from '../services/tutorService';
+import { tutorFacade } from '../state/TutorFacade';
 import { Tutor } from '../types';
 import {
   Button,
@@ -67,8 +67,8 @@ const TutorView: React.FC = () => {
         if (!id) return;
         setModal({ isOpen: true, status: 'loading', message: labels.removingTutor });
         try {
-          await unlinkTutorPet(Number(id), petId);
-          const updated = await getTutorById(Number(id));
+          await tutorFacade.unlinkTutorPet(Number(id), petId);
+          const updated = await tutorFacade.getTutorById(Number(id));
           setTutor(updated);
           setModal({ isOpen: true, status: 'success', message: labels.successRemoveTutor });
           setTimeout(() => closeModal(), 2000);
@@ -87,7 +87,8 @@ const TutorView: React.FC = () => {
   useEffect(() => {
     if (id) {
       setLoading(true);
-      getTutorById(Number(id))
+      tutorFacade
+        .getTutorById(Number(id))
         .then((data) => {
           setTutor(data);
           setLoading(false);
@@ -140,7 +141,7 @@ const TutorView: React.FC = () => {
         petsLinked={tutor.pets}
         onLinked={async () => {
           if (!id) return;
-          const updated = await getTutorById(Number(id));
+          const updated = await tutorFacade.getTutorById(Number(id));
           setTutor(updated);
         }}
       />
