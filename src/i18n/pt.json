@@ -23,10 +23,12 @@
   },
   "tutors": {
     "title": "Tutores",
+    "loading": "Carregando tutores...",
     "addTutor": "Adicionar Tutor",
     "search": "Buscar por nome do tutor...",
     "searchBtn": "Pesquisar",
     "editTitle": "Editar Tutor",
+    "edit": "Editar",
     "createTitle": "Cadastrar Tutor",
     "name": "Nome",
     "email": "E-mail",
@@ -48,7 +50,13 @@
     "confirmRemovePhoto": "Tem certeza que deseja remover a foto?",
     "removingPhoto": "Removendo foto...",
     "successRemovePhoto": "Foto removida com sucesso!",
-    "errorRemovePhoto": "Erro ao remover foto."
+    "errorRemovePhoto": "Erro ao remover foto.",
+    "petsTitle": "Pets do Tutor",
+    "removePet": "Remover vínculo do pet",
+    "confirmRemoveTutor": "Tem certeza que deseja remover o vínculo deste pet?",
+    "removingTutor": "Removendo vínculo do pet...",
+    "successRemoveTutor": "Vínculo do pet removido com sucesso!",
+    "errorRemoveTutor": "Erro ao remover vínculo do pet."
   },
   "petForm": {
     "photoAlt": "Foto do Pet",
@@ -66,7 +74,8 @@
   },
   "cardPet": {
     "breed": "Raça",
-    "age": "Idade"
+    "age": "Idade",
+    "edit": "Editar"
   },
   "petDetails": {
     "loading": "Carregando dados do pet.",
@@ -87,5 +96,16 @@
     "confirmRemoveTutor": "Tem certeza que deseja remover este tutor do pet?",
     "successRemoveTutor": "Tutor removido com sucesso!",
     "removingTutor": "Removendo tutor do pet..."
+  },
+  "petSelect": {
+    "title": "Vincular Pet ao Tutor",
+    "confirmTitle": "Confirmar vínculo",
+    "confirmMessage": "Deseja vincular o pet {{name}} ao tutor?",
+    "confirm": "Confirmar",
+    "linking": "Vinculando...",
+    "link": "Vincular Pet"
+  },
+  "modal": {
+    "close": "Fechar"
   }
 }
